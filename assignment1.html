@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+	<head>
+	<style>
+	</style>
+	<title>Cake Baby</title>
+	<link rel="stylesheet" href="css.css">
+	</head>
+	<body>	
+		
+		<div id="header">
+<li><a id="indexPage" ><h3>Home</h3></a></li>
+<li><a id="aboutPage"><h3>About</h3></a></li>
+<li><a id="contactPage"><h3>Contact</h3></a></li>
+</div>
+<h3>Welcome to Cake Baby</h3>
+
+<div id="sidebar">
+	<div id="cookieRecipe">
+	<h1>The Recipe for making Cookie is </h1>
+	</div>
+
+	  <div id="cakeRecipe">
+	 <h1>The Recipe for making one Cake is </h1>
+	 </div>
+ </div>
+ <div id="main" >
+  <div id="" style="float: left;" >
+  <table width="500px" style="border:1px solid black; overflow:hidden">
+    <tr>
+     <td>Chocolate Cake: <input id="cake" type="text" placeholder="Enter Quantity"  /></td>
+	  <td>Cookies: <input id="cookie" type="text" placeholder="Enter Quantity" /></td>
+	  </tr>
+	 <tr> <td><input type="submit" onclick="proceed()"/></td></tr>
+	 <tr> <td><input type="Reset"  onclick="reloadPage()"/></td></tr>
+	  
+</table>
+ </div>
+ 
+ <div id="bbb" > </div>
+ <br><br><br>
+  <div id="sss"  ></div>
+   
+ </div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script>
+	
+	function proceed(){
+	var cakeCount=document.getElementById("cake").value;
+	var cookieCount=document.getElementById("cookie").value;
+	$.getJSON('a1data.json',function(readData){
+	 var output="<ul>";
+	 var output1="<ul>";
+       // for (var i in readData.recipes) {
+		     //fetch the value from products
+			
+			//put in comparison doc.getelementbyid from user
+			if(readData.recipes[0].name="Chocolate cake")
+			 {
+				var flour=readData.recipes[0].ingredients[0]['Flour']*readData.products[0].cost;
+				var sugar=readData.recipes[0].ingredients[0]['Sugar']*readData.products[1].cost;
+				var eggs=readData.recipes[0].ingredients[0]['Eggs']*readData.products[2].cost;
+				var powder=readData.recipes[0].ingredients[0]['Baking Powder']*readData.products[3].cost;
+				var soda=readData.recipes[0].ingredients[0]['Baking Soda']*readData.products[4].cost;
+				var choc=readData.recipes[0].ingredients[0]['Chocolate Powder']*readData.products[5].cost;
+			
+				output=flour+sugar+eggs+powder+soda+choc;
+						
+				
+				if(cakeCount!=null){
+				var o1=output*cakeCount;
+				var wholeSupp1=(sugar+flour+powder+soda+choc)*cakeCount;
+				var peteSupp1=eggs*cakeCount;
+				
+				//Pete's Quant for cookie 
+			
+				var eggsQuant1=readData.recipes[0].ingredients[0]['Eggs']*cakeCount;
+				//Wholesale Quant for cake
+				var flourQuant1=(readData.recipes[0].ingredients[0]['Flour'])*cakeCount;
+				var sugarQuant1=readData.recipes[0].ingredients[0]['Sugar']*cakeCount;
+				var sodaQuant1=readData.recipes[0].ingredients[0]['Baking Soda']*cakeCount+" tsp";
+				var powderQuant1=readData.recipes[0].ingredients[0]['Baking Powder']*cakeCount;
+				var chocQuant1=readData.recipes[0].ingredients[0]['Chocolate Powder']*cakeCount+" cup";
+							
+				var msg1="<h1> Wholesale Baking Total is: </h1>";
+			var msg2="<h1> Pete's Farm Fresh Ingredients Total is: </h1>";
+			
+				}
+				else{
+				var o1=output;
+				}
+			 }
+				 
+			 if(readData.recipes[1].name="Cookies")
+			 {
+				//calculate cost
+				var butter=readData.recipes[1].ingredients[0]['Butter']*readData.products[7].cost;
+				var flour=readData.recipes[1].ingredients[0]['Flour']*readData.products[0].cost;
+				var sugar=readData.recipes[1].ingredients[0]['Sugar']*readData.products[1].cost;
+				var eggs=readData.recipes[1].ingredients[0]['Eggs']*readData.products[2].cost;
+				var powder=readData.recipes[1].ingredients[0]['Baking Powder']*readData.products[3].cost;
+				var chips=readData.recipes[1].ingredients[0]['Chocolate Chips']*readData.products[6].cost;
+				output1=butter+flour+sugar+eggs+powder+chips;
+		
+				//calc quant by vendor
+				//Pete's Farm Fresh Ingredients eggs and butter
+						
+				if(cookieCount!=null){
+				var o2=output1*cookieCount;
+				var wholeSupp=(sugar+flour+powder+chips)*cookieCount;
+				var peteSupp=(butter+eggs)*cookieCount;
+				
+				var butterQuant=readData.recipes[1].ingredients[0]['Butter']*cookieCount+" cups";
+				var flourQuant=readData.recipes[1].ingredients[0]['Flour']*cookieCount;
+				var sugarQuant=readData.recipes[1].ingredients[0]['Sugar']*cookieCount;
+				var eggsQuant=readData.recipes[1].ingredients[0]['Eggs']*cookieCount;
+				var powderQuant=readData.recipes[1].ingredients[0]['Baking Powder']*cookieCount;
+				var chipsQuant=readData.recipes[1].ingredients[0]['Chocolate Chips']*cookieCount+" cups";
+						
+				var msg1="<h1> Wholesale Baking Total is: </h1>";
+				var msg2="<h1> Pete's Farm Fresh Ingredients Total is: </h1>";
+		
+				}
+				else{
+				var o2=output1;
+				
+				}
+				if(cookieCount!=null&&cakeCount!=null)
+				{
+				//document.getElementById("sss").innerHTML=msg1+wholeSupp1+"<br>"+msg2+peteSupp1;
+				
+				var flourTotal=flourQuant+flourQuant1;
+				var sugatTotal=sugarQuant+sugarQuant1;
+				var powderTotal=powderQuant+powderQuant1;
+				var eggsTotal=eggsQuant+eggsQuant1;
+				
+				var totalWholeCost=wholeSupp1+wholeSupp;
+				var totalPeteCost=peteSupp1+peteSupp;
+				document.getElementById("sss").innerHTML=msg1+parseFloat(totalWholeCost).toFixed(2)+"<br>"+msg2+parseFloat(totalPeteCost).toFixed(2)
+				+"<br>"+ "The quantity of flour for making "+cookieCount+" cookie  and "+cakeCount+" cake from Wholesale Baking  : "+flourTotal+" cup"
+				+"<br>"+ "The quantity of Sugar for making "+cookieCount+" cookie and "+cakeCount+" cake from Wholesale Baking  : "+sugatTotal +" cup"
+				+"<br>"+ "The quantity of Baking Powder for making "+cookieCount+" cookie and "+cakeCount+" cake from Wholesale Baking  : "+powderTotal+" tsp"
+				+"<br>"+ "The quantity of Butter for making "+cookieCount+" cookie from Pete's Farm Fresh Ingredients "+butterQuant
+				+"<br>"+ "The quantity of Eggs for making "+cookieCount+" cookie  and "+cakeCount+" cake from Pete's Farm Fresh Ingredients "+eggsTotal+" unit"
+				+"<br>"+ "The quantity of Chocolate Chips for making "+cookieCount+" cookie from Wholesale Baking  :  "+chipsQuant
+				+"<br>"+ "The quantity of Baking Soda for making "+cakeCount+" cake from Wholesale Baking  : "+sodaQuant1
+				+"<br>"+ "The quantity of Chocolate Powder for making "+cakeCount+" cake from Wholesale Baking  : "+chocQuant1;
+				
+				}
+			 }
+		
+		var msg="<h1> Your Total is: </h1>";
+		var total = o1+o2+"<br>";
+		document.getElementById("bbb").innerHTML=msg+parseFloat(total).toFixed(2);
+		
+		
+  });
+   
+  }
+  $.getJSON('a1data.json',function(readData){
+   		
+			var showCake=readData.recipes[0].ingredients[0];
+		
+			for(var key in showCake)
+			{
+			//	if(i==start){
+				 var show=key+": "+showCake[key];
+				document.getElementById("cakeRecipe").innerHTML+=show+"<br>";
+				//console.log(show);
+				 //document.write(show);
+				// break;
+				//}
+			}
+			var showCookie=readData.recipes[1].ingredients[0];
+		
+			for(var key in showCookie)
+			{
+			//	if(i==start){
+				 var print=key+": "+showCookie[key];
+				document.getElementById("cookieRecipe").innerHTML+=print+"<br>";
+				// break;
+				//}
+			}
+			//document.getElementById("aaa").innerHTML=showCake;
+		  
+});	   
+//reset function	   
+  function reloadPage() {
+    location.reload();
+}
+	</script>	
+	
+	</body>
+</html>
